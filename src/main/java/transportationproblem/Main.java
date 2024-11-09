@@ -4,15 +4,76 @@ import java.util.*;
 
 public class Main {
     public static void main(String[] args) {
-        // process input
-        Scanner scanner = new Scanner(System.in);
-        int[] supply = Arrays.stream(scanner.nextLine().split(" ")).mapToInt(Integer::parseInt).toArray();
-        int[][] costs = new int[supply.length][];
-        for (int i = 0; i < supply.length; i++) {
-            costs[i] = Arrays.stream(scanner.nextLine().split(" ")).mapToInt(Integer::parseInt).toArray();
-        }
-        int[] demand = Arrays.stream(scanner.nextLine().split(" ")).mapToInt(Integer::parseInt).toArray();
-        ProblemConfiguration config = new ProblemConfiguration(supply, costs, demand);
+        // process input from the user
+//        Scanner scanner = new Scanner(System.in);
+//        int[] supply = Arrays.stream(scanner.nextLine().split(" ")).mapToInt(Integer::parseInt).toArray();
+//        int[][] costs = new int[supply.length][];
+//        for (int i = 0; i < supply.length; i++) {
+//            costs[i] = Arrays.stream(scanner.nextLine().split(" ")).mapToInt(Integer::parseInt).toArray();
+//        }
+//        int[] demand = Arrays.stream(scanner.nextLine().split(" ")).mapToInt(Integer::parseInt).toArray();
+//        ProblemConfiguration config = new ProblemConfiguration(supply, costs, demand);
+//        runSolver(config);
+
+        // hard coded input for testing
+        ProblemConfiguration test1 = new ProblemConfiguration(
+                new int[]{20, 30, 25},
+                new int[][]{
+                        {2, 3, 1, 4},
+                        {3, 3, 2, 2},
+                        {4, 2, 5, 9}
+                },
+                new int[]{10, 15, 20, 30}
+        );
+        System.out.println();
+        System.out.println("=== Test 1 ===");
+        System.out.println();
+        runSolver(test1);
+
+        ProblemConfiguration test2 = new ProblemConfiguration(
+                new int[]{20, 30, 25},
+                new int[][]{
+                        {2, 3, 1, 4},
+                        {3, 3, 2, 2},
+                        {4, 2, 5, -9}
+                },
+                new int[]{10, 15, 20, 30}
+        );
+        System.out.println();
+        System.out.println("=== Test 2 ===");
+        System.out.println();
+        runSolver(test2);
+
+        ProblemConfiguration test3 = new ProblemConfiguration(
+                new int[]{20, 30, 25},
+                new int[][]{
+                        {2, 3, 1, 4},
+                        {3, 3, 2, 2},
+                        {4, 2, 5, 9}
+                },
+                new int[]{10, 15, 10, 10}
+        );
+        System.out.println();
+        System.out.println("=== Test 3 ===");
+        System.out.println();
+        runSolver(test3);
+
+        ProblemConfiguration test4 = new ProblemConfiguration(
+                new int[]{160, 140, 170},
+                new int[][]{
+                        {7, 8, 1, 2},
+                        {4, 5, 9, 8},
+                        {9, 2, 3, 6}
+                },
+                new int[]{120, 50, 190, 110}
+        );
+        System.out.println();
+        System.out.println("=== Test 4 ===");
+        System.out.println();
+        runSolver(test4);
+    }
+
+    public static void runSolver(ProblemConfiguration config) {
         System.out.println("Input parameter table:");
         config.printParameterTable();
 
@@ -41,7 +102,6 @@ public class Main {
         // solve using Russell's approximation method
         result = RussellApproximationMethod.solve(config);
         printVector("Initial basic feasible solution using Russell's approximation method:", result);
-
     }
 
     public static void printVector(String title, int[][] vector) {
